@@ -108,14 +108,6 @@ cindices$point_ests_aggr <-  cindices$point_ests_aggr %>%
 
 cindices_Elixhauser <- cindices 
 
-load(file=paste0(save_path,"cindices_all1_Elixhauser2.Rdata"))
-load(file=paste0(save_path,"subgroup_matrix_All1_Elixhauser2.Rdata"))
-subgroups_matrix$subgroup_index <- 1:nrow(subgroups_matrix)
-cindices$point_ests_aggr <-  cindices$point_ests_aggr %>% 
-  left_join(subgroups_matrix,by="subgroup_index")
-
-cindices_Elixhauser2 <- cindices 
-
 
 load(file=paste0(save_path,"cindices_all1.Rdata"))
 load(file=paste0(save_path,"subgroup_matrix_All1.Rdata"))
@@ -125,7 +117,6 @@ cindices$point_ests_aggr <-  cindices$point_ests_aggr %>%
 
 plot_data <- list("CCI10"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "CCI10"),
                   "ECI"=cindices_Elixhauser$point_ests_aggr ,
-                  "ECI2"=cindices_Elixhauser2$point_ests_aggr ,
                   "DCI"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "DCI"),
                   "MDCI"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "MDCI"))
 
@@ -133,7 +124,7 @@ plot_data <- list("CCI10"=cindices$point_ests_aggr %>% filter(risk_score_name %i
 ages <- sort(unique(plot_data[[1]]$indexage))
 
 
-cols <- c(rgb(0,0,0,0.75),rgb(0.55,0.25,0.25,0.75),rgb(0.35,0.35,0.35,0.75),rgb(0.65,0.45,0,0.75),rgb(0,0,0.75,0.75))
+cols <- c(rgb(0,0,0,0.75),rgb(0.55,0.25,0.25,0.75),rgb(0.65,0.45,0,0.75),rgb(0,0,0.75,0.75))
 pchs <- rep(18,20)
 pchs <- list(pchs)
 
