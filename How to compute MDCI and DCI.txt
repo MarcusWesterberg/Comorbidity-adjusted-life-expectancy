@@ -1,0 +1,75 @@
+### ### ### ### ### ### ### ### ### ### ### ### 
+By Marcus Westerberg 
+Code version 1.0
+2026 02 06
+### ### ### ### ### ### ### ### ### ### ### ### 
+
+
+
+
+### ### ### ### ### ### ### ### ### ### ### ### 
+# This file describes how to compute the MDCI and DCI
+
+About
+
+R version 4.0.2 was used with R studio version 1.3.1056
+
+The R packages dplyr, tidyr, parallel and haven were used for data management, parallel computation (needed for large data sets) and for reading SAS-files.
+
+An input dataset with a unique identifier per individual (LopNr) and one or more dates (indexdate) is needed for both the MDCI and DCI. The Swedish Patient Register and The Prescribed Drug Register are needed and all codes / drugs / visists during the preceeding 10 / 1 year Before the index date are needed for correct computation. See the weight files for the lists of codes needed.
+
+
+### ### ### ### ### ### ### ### ### ### ### ##
+
+
+
+
+### FOR EXAMPLES OF HOW DATA NEEDS TO BE STRUCTURED - see folder "Processing patient and drug register" ### 
+
+
+
+
+### ### ### ### ### ### ### ### ### ### ### ##
+MDCI: to compute the MDCI the scripts mdci_inner.R, process_data.R and compute_mdci_function.R are needed (see below) along with the weights in mdci_weights.Rdata. The code is written for The Swedish Patient Register (inpatient+specialized outpatient register) and may need modification if Another dataset is used. The Patient Register was split into separate parts based on LopNr (modulo X) and saved as Rdata-files called par_partx where x indicates the number of the part (1-X). The following variables are required to be present in each par_part file
+
+LopNr, indatum, utdatum, hdia, diagnos, source (inpatient="sluten" and outpatient="oppen"; manually added after combining the two subregisters)
+
+No other preprocessing was performed. 
+
+
+### ### ### ### ### ### ### ### ### ### ### ##
+DCI: to compute the DCI the script compute_dci_function.R (see below) is needed along with weights Men.RData and Women.RData. The code is written for The Swedish Prescribed Drug Register and may need modification if Another dataset is used. To facilitate parallel computation, The Prescribed Drug Register was split into separate parts based on LopNr (modulo X) and saved as Rdata-files called drug_partx where x indicates the number of the part (1-X). The following variables are required to be present in each drug_part file
+
+LopNr, ATC, EDATUM
+
+No other preprocessing was performed. 
+
+### ### ### ### ### ### ### ### ### ### ### ### 
+
+
+
+
+
+### ### ### ### ### ### ### ### ### ### ### ### 
+output from sessionInfo()
+
+R version 4.0.2 (2020-06-22)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=Swedish_Sweden.1252  LC_CTYPE=Swedish_Sweden.1252    LC_MONETARY=Swedish_Sweden.1252 LC_NUMERIC=C                    LC_TIME=Swedish_Sweden.1252    
+
+attached base packages:
+[1] parallel  stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] haven_2.5.4 dplyr_1.1.4 tidyr_1.2.0
+
+loaded via a namespace (and not attached):
+ [1] fansi_0.4.2       utf8_1.2.1        R6_2.5.1          lifecycle_1.0.3   magrittr_2.0.3    pillar_1.9.0      rlang_1.1.1       cli_3.6.1         rstudioapi_0.16.0
+[10] vctrs_0.6.5       generics_0.1.0    forcats_1.0.0     tools_4.0.2       glue_1.6.2        tinytex_0.31      hms_1.1.3         xfun_0.44         compiler_4.0.2   
+[19] pkgconfig_2.0.3   tidyselect_1.2.1  tibble_3.2.1 
+### ### ### ### ### ### ### ### ### ### ### ### 
