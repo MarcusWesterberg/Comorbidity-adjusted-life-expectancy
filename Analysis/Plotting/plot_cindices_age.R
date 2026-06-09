@@ -177,7 +177,6 @@ sexes <- c( "man, woman","man","woman")
 
 cols <- c(rgb(0,0,0,0.75),
           rgb(0.55,0.25,0.25,0.75),
-          rgb(0.45,0.45,0.45,0.75),
           rgb(0.65,0.45,0,0.75),
           rgb(0,0,0.75,0.75))
 ### 
@@ -199,16 +198,6 @@ for(sx in 1:3){
     
     cindices_elixhauser <- cindices
     
-    loads <- load(file=paste0(save_path,"cindices_all_ages",1,"_Elixhauser2.Rdata"))
-    loads <- load(file=paste0(save_path,"subgroup_matrix_all_ages",1,"_Elixhauser2.Rdata"))
-    subgroups_matrix$subgroup_index <- 1:nrow(subgroups_matrix)
-    
-    cindices$point_ests_aggr <-  cindices$point_ests_aggr %>% 
-      left_join(subgroups_matrix,by="subgroup_index") %>%
-      filter(timepoint %in% fu)  %>% 
-      filter(sex %in% sexes[sx] )
-    
-    cindices_elixhauser2 <- cindices
     
     loads <- load(file=paste0(save_path,"cindices_all_ages",1,".Rdata"))
     loads <- load(file=paste0(save_path,"subgroup_matrix_all_ages",1,".Rdata"))
@@ -221,7 +210,6 @@ for(sx in 1:3){
 
     plot_data1 <-  list("CCI"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "CCI10") ,
                         "ECI"=cindices_elixhauser$point_ests_aggr ,
-                        "ECI2"=cindices_elixhauser2$point_ests_aggr ,
                         "DCI"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "DCI"  ),
                         "MDCI"=cindices$point_ests_aggr %>% filter(risk_score_name %in% "MDCI" ))
     
@@ -270,7 +258,7 @@ for(sx in 1:3){
     }  
     
     
-    for(k in 1:5){
+    for(k in 1:4){
       print(k)
       
       plot_data <- plot_data1[[k]]
