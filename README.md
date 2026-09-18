@@ -1,7 +1,7 @@
 # Comorbidity-adjusted-life-expectancy
 R code to compute the MDCI, DCI and health adjusted-life expectancy By Marcus Westerberg, Department of Surgical Sciences, Uppsala University, 2026
 
-This document contains code to compute comorbidity indices and to compute health-adjusted life expectancy.
+This document contains code to compute comorbidity indices and to compute health-adjusted life expectancy as described in https://link.springer.com/article/10.1007/s10654-026-01453-8.
 How to compute the comorbidity indices
 
 See separate readme file "How to compute MDCI and DCI.txt" for how to compute the MDCI (DOI: 10.1371/journal.pone.0296804) and DCI (DOI: 10.1097/EDE.0000000000001358). Code for CCI used in this paper can be found here: https://github.com/bjoroeKI/Charlson-comorbidity-index-revisited.
