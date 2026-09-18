@@ -11,3 +11,6 @@ See separate readme.txt in /Analysis
 Fast computation of life expectancy using a compressed version of the method based on a GAM model (requires R package mgcv)
 
 See example fastCALE_example.R script
+
+If you use code and estimates from this repository in your research, please cite
+Westerberg M, Garmo H, Ludvigsson JF, Stattin P, Gedeborg R. Comorbidity-adjusted life expectancy using comprehensive summary measures of medical history: nationwide, population-based study in Sweden. Eur J Epidemiol. 2026 Aug 20. doi: 10.1007/s10654-026-01453-8. 
